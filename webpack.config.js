@@ -1,12 +1,15 @@
 const path = require("path");
 const glob = require("glob");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const webpackConfig = {
   entry: {},
   output: {
     path: __dirname + "/dist",
-    filename: "[name].js",
+    filename: "assets/js/[name].js",
   },
   devtool: "cheap-module-eval-source-map",
   devServer: {
@@ -25,25 +28,31 @@ const webpackConfig = {
         },
       },
       {
-        test: /\.css/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              url: false,
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: "file-loader",
+        options: {
+          name: "assets/img/[name].[ext]",
+        },
       },
     ],
   },
   resolve: {
     modules: [path.resolve("./src"), path.resolve("./node_modules")],
   },
-  plugins: [],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "assets/css/[name].css", // CSS の出力先のファイル名 (static/dist/bundle.css に出力)
+    }),
+  ],
   optimization: {
-    minimize: true,
+    minimizer: [
+      new TerserPlugin(), // JavaScript の minify を行う
+      new OptimizeCSSAssetsPlugin(), // CSS の minify を行う
+    ],
   },
 };
 
@@ -67,6 +76,11 @@ allPureDirName.forEach((dir) => {
       chunks: [dir],
     })
   );
+  // webpackConfig.plugins.push(
+  //   new MiniCssExtractPlugin({
+  //     filename: dir + ".css", // CSS の出力先のファイル名 (static/dist/bundle.css に出力)
+  //   })
+  // );
 });
 
 module.exports = webpackConfig;
