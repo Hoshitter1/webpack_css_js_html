@@ -1,0 +1,48 @@
+/* General styling */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #eee;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
+
+header {
+    background-color: #f5ba13;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    color: black;
+    background-color: #f5ba13;
+}
+
+.container {
+    text-align: center;
+    padding: 100px 100px;
+}
+
+.btn {
+    background-color: khaki;
+    margin-top: 100px;
+    padding: 50px 50px;
+}
+
+.btn:hover {
+    background-color: lavender;
+}
