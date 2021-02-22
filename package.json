@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
+    "build:production": "webpack --mode=production",
     "start": "webpack-dev-server"
   },
   "repository": {

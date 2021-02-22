@@ -3,7 +3,6 @@ const glob = require("glob");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const webpackConfig = {
-  mode: "none",
   entry: {},
   output: {
     path: __dirname + "/dist",
@@ -43,6 +42,9 @@ const webpackConfig = {
     modules: [path.resolve("./src"), path.resolve("./node_modules")],
   },
   plugins: [],
+  optimization: {
+    minimize: true,
+  },
 };
 
 const allPureDirName = glob
