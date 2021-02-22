@@ -46,3 +46,7 @@ footer {
 .btn:hover {
     background-color: lavender;
 }
+
+.icon {
+    width: 30px;
+}
